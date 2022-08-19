@@ -1,6 +1,7 @@
 import * as express from 'express';
 import 'express-async-errors';
-import controllerRouter from './routers/usersRouter';
+import usersrRouter from './routers/usersRouter';
+import teamsRouter from './routers/teamsRouter';
 import errorHandler from './middlewares/ErrorMiddleware';
 
 class App {
@@ -26,7 +27,8 @@ class App {
     this.app.use(express.json());
     this.app.use(accessControl);
 
-    this.app.use(controllerRouter);
+    this.app.use(usersrRouter);
+    this.app.use(teamsRouter);
     this.app.use(errorHandler);
   }
 

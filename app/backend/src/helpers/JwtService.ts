@@ -1,7 +1,7 @@
 import * as jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 import { Secret, SignOptions } from 'jsonwebtoken';
-import IBodyReq from '../interfaces/IBodyReq';
+import IBodyReq from '../interfaces/userInterfaces/IBodyReq';
 
 dotenv.config();
 
