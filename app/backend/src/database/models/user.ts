@@ -7,8 +7,6 @@ class User extends Model {
   role!: number;
   email!: string;
   password!: string;
-  createdAt!: Date;
-  updatedAt!: Date;
 }
 
 User.init({
