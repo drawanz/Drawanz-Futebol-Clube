@@ -16,8 +16,8 @@ export default class UsersService implements IUserService {
     Validation.validateEmail(reqBody.email);
     Validation.validatePassword(reqBody.password);
     const user = await User.findOne({ where: { email: reqBody.email } });
-    const data = user as User;
     Validation.validateIfCorrectEmail(user);
+    const data = user as User;
     const compare = await PasswodService.compare(reqBody.password, data.password);
     Validation.validateIfCorrectPassword(compare);
     const token = JwtService.sign(reqBody.email, reqBody.password);
