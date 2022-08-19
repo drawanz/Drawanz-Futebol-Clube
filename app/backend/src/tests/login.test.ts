@@ -1,14 +1,14 @@
 // import * as sinon from 'sinon';
 const Sinon = require('sinon');
 const chai = require('chai');
-import IDataValues from '../interfaces/IDataValues';
+import IDataValues from '../interfaces/userInterfaces/IDataValues';
 const chaiHttp = require('chai-http');
 
 chai.use(chaiHttp);
 
 import { app } from '../app';
 import { Response } from 'superagent';
-import IBodyReq from '../interfaces/IBodyReq';
+import IBodyReq from '../interfaces/userInterfaces/IBodyReq';
 import User from '../database/models/user';
 
 const { expect } = chai;
