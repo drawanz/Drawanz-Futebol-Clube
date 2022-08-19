@@ -25,23 +25,32 @@ const bodyMock: IBodyReq = {
   password: "secret_admin"
 }
 
-const tokenMock = {
-  token: "my mocked token :)"
-}
+const tokenMock: string = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInBhc3N3b3JkIjoic2VjcmV0X2FkbWluIiwiaWF0IjoxNjYwOTM0NjA5fQ.NZBlivcyj9Yai4esiGeuJ_9eIw5n0KMRB6LyMZ5j76E";
+
 
 describe('Testing Users', () => {
   describe('Testing Login', () => {
-    it(`should return status code 200, a body with a propery named token and 
-    the token should be a string`, async () => {
+    it('should return token', async () => {
       Sinon.stub(User, "findOne").resolves(userMock as User);
       const response = await chai.request(app).post('/login').send(bodyMock);
       expect(response.status).to.equal(200);
-      // console.log(response);
       expect(response.body).to.have.property('token');
       expect(response.body.token).to.be.a('string');
       Sinon.restore();
     })
   })
 
-
+  describe('Testing Login Validate', () => {
+    it('should return role', async () => {
+      Sinon.stub(User, "findOne").resolves(userMock as User);
+      const response = await chai.request(app)
+        .get('/login/validate')
+        .set('authorization', tokenMock)
+        .send();
+      expect(response.status).to.equal(200);
+      expect(response.body).to.have.property('role');
+      expect(response.body.role).to.be.a('string');
+      Sinon.restore();
+    })
+  })
 });
