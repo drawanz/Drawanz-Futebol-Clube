@@ -3,8 +3,8 @@ import db from '.';
 
 class User extends Model {
   id!: number;
-  username!: number;
-  role!: number;
+  username!: string;
+  role!: string;
   email!: string;
   password!: string;
 }

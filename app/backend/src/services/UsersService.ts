@@ -8,26 +8,27 @@ import Validation from '../helpers/ValidationEmailPassword';
 
 export default class UsersService implements IUserService {
   private _userRepository: IUserMethods;
-
-  constructor() {
-    this._userRepository = User;
-  }
+  private reqBody: IBodyReq;
+  private reqHeaders: string;
 
   public async login(reqBody: IBodyReq): Promise<string> {
+    this.reqBody = reqBody;
     Validation.validateEmail(reqBody.email);
     Validation.validatePassword(reqBody.password);
-    const user = await this._userRepository.findOne({ where: { email: reqBody.email } });
+    const user = await User.findOne({ where: { email: reqBody.email } });
+    const data = user as User;
     Validation.validateIfCorrectEmail(user);
-    const { dataValues } = user;
-    const compare = await PasswodService.compare(reqBody.password, dataValues.password);
+    const compare = await PasswodService.compare(reqBody.password, data.password);
     Validation.validateIfCorrectPassword(compare);
     const token = JwtService.sign(reqBody.email, reqBody.password);
     return token;
   }
 
   public async loginValidate(reqHeaders: string | string): Promise<string> {
+    this.reqHeaders = reqHeaders;
     const userDate = JwtService.verify(reqHeaders);
-    const user = await this._userRepository.findOne({ where: { email: userDate.email } });
-    return user.dataValues.role;
+    const user = await User.findOne({ where: { email: userDate.email } });
+    const data = user as User;
+    return data.role;
   }
 }
