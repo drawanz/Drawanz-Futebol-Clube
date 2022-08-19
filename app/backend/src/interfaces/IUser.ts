@@ -1,6 +1,5 @@
-export default interface IUser {
-  username: string,
-  role: string,
-  email: string,
-  password: string
+import IDataValues from './IDataValues';
+
+export default interface IUser extends IDataValues{
+  dataValues: IDataValues
 }
