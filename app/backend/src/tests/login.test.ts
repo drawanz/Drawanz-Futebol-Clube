@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 
 import { app } from '../app';
 import IBodyReq from '../interfaces/userInterfaces/IBodyReq';
-import User from '../database/models/user';
+import User from '../database/models/User';
 
 const { expect } = chai;
 
