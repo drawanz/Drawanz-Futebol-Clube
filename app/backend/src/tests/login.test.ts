@@ -1,4 +1,4 @@
-// import * as sinon from 'sinon';
+
 const Sinon = require('sinon');
 const chai = require('chai');
 import IDataValues from '../interfaces/userInterfaces/IDataValues';
@@ -9,6 +9,7 @@ chai.use(chaiHttp);
 import { app } from '../app';
 import { Response } from 'superagent';
 import IBodyReq from '../interfaces/userInterfaces/IBodyReq';
+import UserRepository from '../repositories/UserRepository';
 import User from '../database/models/user';
 
 const { expect } = chai;
@@ -28,10 +29,10 @@ const bodyMock: IBodyReq = {
 const tokenMock: string = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInBhc3N3b3JkIjoic2VjcmV0X2FkbWluIiwiaWF0IjoxNjYwOTM0NjA5fQ.NZBlivcyj9Yai4esiGeuJ_9eIw5n0KMRB6LyMZ5j76E";
 
 
-describe('Testing Users', () => {
+describe.only('Testing Users', () => {
   describe('Testing Login', () => {
     it('should return token', async () => {
-      Sinon.stub(User, "findOne").resolves(userMock as User);
+      Sinon.stub(User, "findOne").resolves(userMock as IDataValues);
       const response = await chai.request(app).post('/login').send(bodyMock);
       expect(response.status).to.equal(200);
       expect(response.body).to.have.property('token');
@@ -42,7 +43,7 @@ describe('Testing Users', () => {
 
   describe('Testing Login Validate', () => {
     it('should return role', async () => {
-      Sinon.stub(User, "findOne").resolves(userMock as User);
+      Sinon.stub(User, "findOne").resolves(userMock as IDataValues);
       const response = await chai.request(app)
         .get('/login/validate')
         .set('authorization', tokenMock)
