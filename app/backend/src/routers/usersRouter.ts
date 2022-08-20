@@ -1,8 +1,10 @@
 import { Router, Request, Response } from 'express';
+import UserRepository from '../repositories/UserRepository';
 import UserController from '../controllers/UsersController';
 import UsersService from '../services/UsersService';
 
-const userService = new UsersService();
+const userRepository = new UserRepository();
+const userService = new UsersService(userRepository);
 const userController = new UserController(userService);
 
 const router = Router();
