@@ -1,5 +1,5 @@
 import IUserMethods from '../interfaces/userInterfaces/IUserMethods';
-import User from '../database/models/user';
+import User from '../database/models/User';
 import IDataValues from '../interfaces/userInterfaces/IDataValues';
 
 export default class UserRepository implements IUserMethods {

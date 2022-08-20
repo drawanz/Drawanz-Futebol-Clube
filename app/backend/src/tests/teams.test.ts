@@ -5,7 +5,7 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
 import { app } from '../app';
-import Teams from '../database/models/teams';
+import Teams from '../database/models/Teams';
 import ITeam from '../interfaces/teamsInterfaces/ITeam'
 
 const { expect } = chai;
