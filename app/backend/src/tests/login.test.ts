@@ -1,4 +1,3 @@
-
 const Sinon = require('sinon');
 const chai = require('chai');
 import IDataValues from '../interfaces/userInterfaces/IDataValues';
@@ -7,9 +6,7 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
 import { app } from '../app';
-import { Response } from 'superagent';
 import IBodyReq from '../interfaces/userInterfaces/IBodyReq';
-import UserRepository from '../repositories/UserRepository';
 import User from '../database/models/user';
 
 const { expect } = chai;
@@ -29,7 +26,7 @@ const bodyMock: IBodyReq = {
 const tokenMock: string = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInBhc3N3b3JkIjoic2VjcmV0X2FkbWluIiwiaWF0IjoxNjYwOTM0NjA5fQ.NZBlivcyj9Yai4esiGeuJ_9eIw5n0KMRB6LyMZ5j76E";
 
 
-describe.only('Testing Users', () => {
+describe('Testing Users', () => {
   describe('Testing Login', () => {
     it('should return token', async () => {
       Sinon.stub(User, "findOne").resolves(userMock as IDataValues);
