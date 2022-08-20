@@ -1,5 +1,5 @@
 import IDataValues from './IDataValues';
 
 export default interface IUserMethods {
-  findOne(entity: object): Promise<IDataValues>
+  findOne(entity: string): Promise<IDataValues>
 }
