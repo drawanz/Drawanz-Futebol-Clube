@@ -9,4 +9,9 @@ export default class TeamService implements ITeamService {
     const response = await this.teams.findAll();
     return response as ITeam[];
   }
+
+  public async listById(id: string): Promise<ITeam> {
+    const response = await this.teams.findByPk(id);
+    return response as ITeam;
+  }
 }

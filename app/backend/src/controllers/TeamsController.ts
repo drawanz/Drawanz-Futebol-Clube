@@ -12,4 +12,9 @@ export default class TeamsController {
     const response = await this._teamsService.list();
     res.status(200).send(response);
   }
+
+  public async listById(req: Request, res: Response): Promise<void> {
+    const response = await this._teamsService.listById(req.params.id);
+    res.status(200).send(response);
+  }
 }
