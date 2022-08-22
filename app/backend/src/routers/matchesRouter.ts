@@ -26,4 +26,10 @@ router.post(
   (req: Request, res: Response) => matchesController.addMatch(req, res),
 );
 
+router.patch(
+  '/matches/:id/finish',
+  verifyToken,
+  (req: Request, res: Response) => matchesController.changeProgress(req, res),
+);
+
 export default router;
