@@ -18,4 +18,10 @@ export default class MatchesControllers {
     const response = await this._matchesService.listByFilter(inProgress as string);
     res.status(200).send(response);
   }
+
+  public async addMatch(req: Request, res: Response): Promise<void> {
+    console.log('teste');
+    const response = await this._matchesService.addMatch(req.body);
+    res.status(201).send(response);
+  }
 }

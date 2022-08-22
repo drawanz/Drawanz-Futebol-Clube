@@ -1,3 +1,4 @@
+import IData from '../interfaces/matchesInterfaces/IData';
 import IMatches from '../interfaces/matchesInterfaces/IMatches';
 import IMatchesMethods from '../interfaces/matchesInterfaces/IMatchesMethods';
 
@@ -12,5 +13,26 @@ export default class MatchesService implements IMatchesMethods {
   public async listByFilter(query: string): Promise<IMatches[]> {
     const response = await this.matchesRepository.listByFilter(query);
     return response as IMatches[];
+  }
+
+  public async addMatch(data: IData): Promise<IMatches> {
+    const query = {
+      where: {
+        homeTeam: data.homeTeam,
+        awayTeam: data.awayTeam,
+        homeTeamGoals: data.homeTeamGoals,
+        awayTeamGoals: data.awayTeamGoals,
+      },
+      defaults: {
+        homeTeam: data.homeTeam,
+        awayTeam: data.awayTeam,
+        homeTeamGoals: data.homeTeamGoals,
+        awayTeamGoals: data.awayTeamGoals,
+        inProgress: true,
+      },
+    };
+
+    const response = await this.matchesRepository.addMatch(query);
+    return response as IMatches;
   }
 }

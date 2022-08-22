@@ -32,4 +32,16 @@ export default class MatchesRepository implements IMatchesMethods {
     });
     return response as IMatches[];
   }
+
+  public async addMatch(query: object): Promise<IMatches> {
+    const [response] = await this._matchessRepository.findOrCreate(query);
+    return {
+      id: response.getDataValue('id'),
+      homeTeam: response.getDataValue('homeTeam'),
+      homeTeamGoals: response.getDataValue('homeTeamGoals'),
+      awayTeam: response.getDataValue('awayTeam'),
+      awayTeamGoals: response.getDataValue('awayTeamGoals'),
+      inProgress: response.getDataValue('inProgress'),
+    };
+  }
 }
