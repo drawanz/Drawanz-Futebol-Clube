@@ -1,7 +1,8 @@
 import IMatches from './IMatches';
 
 export default interface IMatchesMethods {
-  list(): Promise<IMatches[]>,
+  list(query: object): Promise<IMatches[]>,
   listByFilter(query: string): Promise<IMatches[]>,
-  addMatch(data: object): Promise<IMatches>
+  addMatch(data: object): Promise<IMatches>,
+  changeProgress(id: number): Promise<object>
 }
