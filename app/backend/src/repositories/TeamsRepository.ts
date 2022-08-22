@@ -1,7 +1,8 @@
 import ITeam from '../interfaces/teamsInterfaces/ITeam';
+import ITeamMethods from '../interfaces/teamsInterfaces/ITeamMethods';
 import Teams from '../database/models/Teams';
 
-export default class TeamsRepository {
+export default class TeamsRepository implements ITeamMethods {
   private _teamsRepository;
 
   constructor(private teamsRepository = Teams) {
