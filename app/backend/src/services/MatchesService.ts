@@ -1,3 +1,4 @@
+import Teams from '../database/models/Teams';
 import IData from '../interfaces/matchesInterfaces/IData';
 import IMatches from '../interfaces/matchesInterfaces/IMatches';
 import IMatchesMethods from '../interfaces/matchesInterfaces/IMatchesMethods';
@@ -6,7 +7,19 @@ export default class MatchesService implements IMatchesMethods {
   constructor(private matchesRepository: IMatchesMethods) { }
 
   public async list(): Promise<IMatches[]> {
-    const response = await this.matchesRepository.list();
+    const query = {
+      include: [{
+        model: Teams,
+        as: 'teamHome',
+        attributes: ['teamName'],
+      }, {
+        model: Teams,
+        as: 'teamAway',
+        attributes: ['teamName'],
+      }],
+    };
+
+    const response = await this.matchesRepository.list(query);
     return response as IMatches[];
   }
 
@@ -31,5 +44,10 @@ export default class MatchesService implements IMatchesMethods {
 
     const response = await this.matchesRepository.addMatch(query);
     return response as IMatches;
+  }
+
+  public async changeProgress(id: number): Promise<object> {
+    const response = await this.matchesRepository.changeProgress(id);
+    return response;
   }
 }
