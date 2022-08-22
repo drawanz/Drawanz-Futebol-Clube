@@ -2,6 +2,7 @@ import * as express from 'express';
 import 'express-async-errors';
 import usersrRouter from './routers/usersRouter';
 import teamsRouter from './routers/teamsRouter';
+import matchesRouter from './routers/matchesRouter';
 import errorHandler from './middlewares/ErrorMiddleware';
 
 class App {
@@ -29,6 +30,7 @@ class App {
 
     this.app.use(usersrRouter);
     this.app.use(teamsRouter);
+    this.app.use(matchesRouter);
     this.app.use(errorHandler);
   }
 
