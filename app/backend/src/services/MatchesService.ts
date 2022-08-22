@@ -8,4 +8,9 @@ export default class MatchesService implements IMatchesMethods {
     const response = await this.matchesRepository.list();
     return response as IMatches[];
   }
+
+  public async listByFilter(query: string): Promise<IMatches[]> {
+    const response = await this.matchesRepository.listByFilter(query);
+    return response as IMatches[];
+  }
 }

@@ -10,13 +10,13 @@ const matchesController = new MatchesControllers(matchesService);
 const router = Router();
 
 router.get(
+  '/matches/search',
+  (req: Request, res: Response) => matchesController.listByFilter(req, res),
+);
+
+router.get(
   '/matches',
   (req: Request, res: Response) => matchesController.list(req, res),
 );
-
-// router.get(
-//   '/teams/:id',
-//   (req: Request, res: Response) => teamsController.listById(req, res),
-// );
 
 export default router;

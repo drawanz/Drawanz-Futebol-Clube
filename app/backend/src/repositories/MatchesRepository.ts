@@ -24,4 +24,12 @@ export default class MatchesRepository implements IMatchesMethods {
     });
     return response as IMatches[];
   }
+
+  public async listByFilter(query: string): Promise<IMatches[]> {
+    const queryBool = query === 'true';
+    const response = await this._matchessRepository.findAll({
+      where: { inProgress: queryBool },
+    });
+    return response as IMatches[];
+  }
 }

@@ -12,4 +12,10 @@ export default class MatchesControllers {
     const response = await this._matchesService.list();
     res.status(200).send(response);
   }
+
+  public async listByFilter(req: Request, res: Response): Promise<void> {
+    const { inProgress } = req.query;
+    const response = await this._matchesService.listByFilter(inProgress as string);
+    res.status(200).send(response);
+  }
 }
