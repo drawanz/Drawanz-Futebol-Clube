@@ -9,7 +9,7 @@ export default class MatchesControllers {
   }
 
   public async list(req: Request, res: Response): Promise<void> {
-    const response = await this._matchesService.list();
+    const response = await this._matchesService.list(req);
     res.status(200).send(response);
   }
 
@@ -20,8 +20,13 @@ export default class MatchesControllers {
   }
 
   public async addMatch(req: Request, res: Response): Promise<void> {
-    console.log('teste');
     const response = await this._matchesService.addMatch(req.body);
     res.status(201).send(response);
+  }
+
+  public async changeProgress(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    const response = await this._matchesService.changeProgress(+id);
+    res.status(200).send(response);
   }
 }
