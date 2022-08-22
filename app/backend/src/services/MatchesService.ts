@@ -2,6 +2,7 @@ import Teams from '../database/models/Teams';
 import IData from '../interfaces/matchesInterfaces/IData';
 import IMatches from '../interfaces/matchesInterfaces/IMatches';
 import IMatchesMethods from '../interfaces/matchesInterfaces/IMatchesMethods';
+import verifyTeams from '../helpers/VerifyTeams';
 
 export default class MatchesService implements IMatchesMethods {
   constructor(private matchesRepository: IMatchesMethods) { }
@@ -31,6 +32,7 @@ export default class MatchesService implements IMatchesMethods {
   public async addMatch(
     { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals }: IData,
   ): Promise<IMatches> {
+    await verifyTeams(homeTeam, awayTeam);
     const query = {
       where: { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals },
       defaults: {

@@ -7,10 +7,14 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     throw new ErrorException(417, 'You need a token');
   }
 
-  const verify = JwtService.verify(req.headers.authorization as string);
+  try {
+    const verify = JwtService.verify(req.headers.authorization as string);
 
-  if (!verify.email) {
-    throw new ErrorException(401, 'Invalid token');
+    if (!verify) {
+      throw new ErrorException(401, 'Token must be a valid token');
+    }
+  } catch (e) {
+    throw new ErrorException(401, 'Token must be a valid token');
   }
 
   next();
