@@ -15,19 +15,16 @@ export default class MatchesService implements IMatchesMethods {
     return response as IMatches[];
   }
 
-  public async addMatch(data: IData): Promise<IMatches> {
+  public async addMatch(
+    { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals }: IData,
+  ): Promise<IMatches> {
     const query = {
-      where: {
-        homeTeam: data.homeTeam,
-        awayTeam: data.awayTeam,
-        homeTeamGoals: data.homeTeamGoals,
-        awayTeamGoals: data.awayTeamGoals,
-      },
+      where: { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals },
       defaults: {
-        homeTeam: data.homeTeam,
-        awayTeam: data.awayTeam,
-        homeTeamGoals: data.homeTeamGoals,
-        awayTeamGoals: data.awayTeamGoals,
+        homeTeam,
+        awayTeam,
+        homeTeamGoals,
+        awayTeamGoals,
         inProgress: true,
       },
     };
