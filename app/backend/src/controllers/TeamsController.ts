@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
-import ITeamService from '../interfaces/teamsInterfaces/ITeamsService';
+import ITeamMethods from '../interfaces/teamsInterfaces/ITeamMethods';
+// import ITeamService from '../interfaces/teamsInterfaces/ITeamsService';
 
 export default class TeamsController {
-  private _teamsService: ITeamService;
+  private _teamsService: ITeamMethods;
 
-  constructor(teamsService: ITeamService) {
+  constructor(teamsService: ITeamMethods) {
     this._teamsService = teamsService;
   }
 

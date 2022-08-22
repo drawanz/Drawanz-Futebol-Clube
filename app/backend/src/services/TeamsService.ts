@@ -1,9 +1,8 @@
-import ITeamService from '../interfaces/teamsInterfaces/ITeamsService';
 import ITeam from '../interfaces/teamsInterfaces/ITeam';
-import TeamsMethods from '../interfaces/teamsInterfaces/ITeamMethods';
+import ITeamMethods from '../interfaces/teamsInterfaces/ITeamMethods';
 
-export default class TeamService implements ITeamService {
-  constructor(private teamsRepository: TeamsMethods) { }
+export default class TeamService implements ITeamMethods {
+  constructor(private teamsRepository: ITeamMethods) { }
 
   public async list(): Promise<ITeam[]> {
     const response = await this.teamsRepository.list();
