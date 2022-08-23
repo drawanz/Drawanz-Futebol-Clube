@@ -39,4 +39,14 @@ export default class MatchesRepository implements IMatchesMethods {
       .update({ inProgress: false }, { where: { id } });
     return { message: 'Finished' };
   }
+
+  public async changeGoals(
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+    id: number,
+  ): Promise<object> {
+    await this._matchessRepository
+      .update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+    return { message: 'Finished' };
+  }
 }

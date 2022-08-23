@@ -29,4 +29,12 @@ export default class MatchesControllers {
     const response = await this._matchesService.changeProgress(+id);
     res.status(200).send(response);
   }
+
+  public async changeGoals(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    const response = await this._matchesService
+      .changeGoals(homeTeamGoals, awayTeamGoals, +id);
+    res.status(200).send(response);
+  }
 }

@@ -52,4 +52,14 @@ export default class MatchesService implements IMatchesMethods {
     const response = await this.matchesRepository.changeProgress(id);
     return response;
   }
+
+  public async changeGoals(
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+    id: number,
+  ): Promise<object> {
+    const response = await this.matchesRepository
+      .changeGoals(homeTeamGoals, awayTeamGoals, id);
+    return response;
+  }
 }

@@ -34,4 +34,10 @@ router.patch(
   (req: Request, res: Response) => matchesController.changeProgress(req, res),
 );
 
+router.patch(
+  '/matches/:id',
+  verifyToken,
+  (req: Request, res: Response) => matchesController.changeGoals(req, res),
+);
+
 export default router;

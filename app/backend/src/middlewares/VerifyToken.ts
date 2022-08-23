@@ -9,7 +9,6 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
 
   try {
     const verify = JwtService.verify(req.headers.authorization as string);
-
     if (!verify) {
       throw new ErrorException(401, 'Token must be a valid token');
     }
