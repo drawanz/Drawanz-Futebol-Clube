@@ -12,13 +12,11 @@ const router = Router();
 
 router.get(
   '/matches/search',
-  verifyToken,
   (req: Request, res: Response) => matchesController.listByFilter(req, res),
 );
 
 router.get(
   '/matches',
-  verifyToken,
   (req: Request, res: Response) => matchesController.list(req, res),
 );
 
