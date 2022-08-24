@@ -6,11 +6,11 @@ import IMatches from '../interfaces/matchesInterfaces/IMatches';
 export default class LeaderBoardService implements ILeaderMethods {
   constructor(private leaderBoardRepository: ILeaderMethod) { }
 
-  public async listBoard(): Promise<ILeader[]> {
+  public async listBoard(homeOrAway: string): Promise<ILeader[]> {
     const matches = await this.leaderBoardRepository.getMatches();
     const teams = await this.leaderBoardRepository.getTeams();
     const response = teams.map((e) => {
-      const teamStats = LeaderBoardService.getTeamStats(e.id, matches);
+      const teamStats = LeaderBoardService.getTeamStats(homeOrAway, e.id, matches);
       return {
         name: e.teamName,
         totalPoints: teamStats.totalPoints,
@@ -27,7 +27,7 @@ export default class LeaderBoardService implements ILeaderMethods {
     return response;
   }
 
-  static getTeamStats(id: number, matches: IMatches[]) {
+  static getTeamHomeStats(id: number, matches: IMatches[]) {
     const games = matches.filter((e) => e.homeTeam === id);
     const totalGames = games.length;
     const totalVictories = games.filter((e) => e.homeTeamGoals > e.awayTeamGoals).length;
@@ -45,5 +45,34 @@ export default class LeaderBoardService implements ILeaderMethods {
       goalsFavor,
       goalsOwn,
       goalsBalance };
+  }
+
+  static getTeamAwayStats(id: number, matches: IMatches[]) {
+    const games = matches.filter((e) => e.awayTeam === id);
+    const totalGames = games.length;
+    const totalVictories = games.filter((e) => e.homeTeamGoals < e.awayTeamGoals).length;
+    const totalLosses = games.filter((e) => e.homeTeamGoals > e.awayTeamGoals).length;
+    const totalDraws = totalGames - (totalVictories + totalLosses);
+    const goalsFavor = games.map((e) => e.awayTeamGoals).reduce((acc, value) => acc + value);
+    const goalsOwn = games.map((e) => e.homeTeamGoals).reduce((acc, value) => acc + value);
+    const goalsBalance = goalsFavor - goalsOwn;
+    const totalPoints = (totalVictories * 3) + (totalDraws);
+    return { totalPoints,
+      totalGames,
+      totalVictories,
+      totalDraws,
+      totalLosses,
+      goalsFavor,
+      goalsOwn,
+      goalsBalance };
+  }
+
+  static getTeamStats(homeOrAway: string, id: number, matches: IMatches[]) {
+    if (homeOrAway === 'home') {
+      const teamStats = LeaderBoardService.getTeamHomeStats(id, matches);
+      return teamStats;
+    }
+    const teamStats = LeaderBoardService.getTeamAwayStats(id, matches);
+    return teamStats;
   }
 }
