@@ -1,11 +1,12 @@
+import ILeaderMethods from '../interfaces/leaderInterfaces/ILeaderMethods';
+import ILeader from '../interfaces/leaderInterfaces/ILeader';
+import ILeaderMethod from '../interfaces/leaderInterfaces/ILeaderRepoMethods';
 import IMatches from '../interfaces/matchesInterfaces/IMatches';
-import HelpersBoard from '../helpers/HelpersBoard';
-// import LeaderBoardRepository from '../repositories/LeaderBoardRepository';
 
-export default class LeaderBoardService {
-  constructor(private leaderBoardRepository: HelpersBoard) { }
+export default class LeaderBoardService implements ILeaderMethods {
+  constructor(private leaderBoardRepository: ILeaderMethod) { }
 
-  public async listBoard() {
+  public async listBoard(): Promise<ILeader[]> {
     const matches = await this.leaderBoardRepository.getMatches();
     const teams = await this.leaderBoardRepository.getTeams();
     const response = teams.map((e) => {
