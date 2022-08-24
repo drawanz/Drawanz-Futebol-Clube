@@ -11,7 +11,12 @@ const router = Router();
 
 router.get(
   '/leaderboard/home',
-  (req: Request, res: Response) => leaderBoardController.listBoard(req, res),
+  (req: Request, res: Response) => leaderBoardController.getHome(req, res),
+);
+
+router.get(
+  '/leaderboard/away',
+  (req: Request, res: Response) => leaderBoardController.getAway(req, res),
 );
 
 export default router;
