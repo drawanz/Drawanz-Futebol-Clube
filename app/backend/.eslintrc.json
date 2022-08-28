@@ -21,7 +21,8 @@
   "plugins": [
     "@typescript-eslint",
     "sonarjs",
-    "mocha"
+    "mocha",
+    "swagger-autogen"
   ],
   "rules": {
     "no-underscore-dangle": "off",

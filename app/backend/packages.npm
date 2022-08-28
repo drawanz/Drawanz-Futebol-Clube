@@ -1,1 +1,5 @@
 express-async-errors
+swagger-autogen
+swagger-ui-express
+@types/swagger-ui-express
+swagger

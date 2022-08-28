@@ -1,5 +1,7 @@
 import * as express from 'express';
 import 'express-async-errors';
+// import swaggerUi from 'swagger-ui-express';
+const swaggerUi = require('swagger-ui-express');
 import usersrRouter from './routers/usersRouter';
 import teamsRouter from './routers/teamsRouter';
 import matchesRouter from './routers/matchesRouter';
@@ -14,7 +16,6 @@ class App {
 
     this.config();
 
-    // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }
 
@@ -34,6 +35,7 @@ class App {
     this.app.use(matchesRouter);
     this.app.use(leaderBoardRouter);
     this.app.use(errorHandler);
+    this.app.use('/doc', swaggerUi.serve, swaggerUi.setup('../swagger-output.json'));
   }
 
   public start(PORT: string | number):void {
@@ -43,5 +45,4 @@ class App {
 
 export { App };
 
-// A execução dos testes de cobertura depende dessa exportação
 export const { app } = new App();
