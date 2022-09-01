@@ -1,12 +1,12 @@
 import * as express from 'express';
 import 'express-async-errors';
-// import swaggerUi from 'swagger-ui-express';
-const swaggerUi = require('swagger-ui-express');
+import * as swaggerUi from 'swagger-ui-express';
 import usersrRouter from './routers/usersRouter';
 import teamsRouter from './routers/teamsRouter';
 import matchesRouter from './routers/matchesRouter';
 import leaderBoardRouter from './routers/leaderBoardRouter';
 import errorHandler from './middlewares/ErrorMiddleware';
+import * as swaggerFile from './swagger-output.json';
 
 class App {
   public app: express.Express;
@@ -35,7 +35,7 @@ class App {
     this.app.use(matchesRouter);
     this.app.use(leaderBoardRouter);
     this.app.use(errorHandler);
-    this.app.use('/doc', swaggerUi.serve, swaggerUi.setup('../swagger-output.json'));
+    this.app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
   }
 
   public start(PORT: string | number):void {

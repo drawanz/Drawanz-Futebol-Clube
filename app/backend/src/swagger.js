@@ -1,6 +1,6 @@
 const swaggerAutogen = require('swagger-autogen')();
 
-const outputFile = 'swagger-output.json';
+const outputFile = 'src/swagger-output.json';
 const endpointsFiles = [
   'src/routers/leaderBoardRouter.ts', 
   'src/routers/matchesRouter.ts',
