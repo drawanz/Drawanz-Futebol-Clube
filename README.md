@@ -7,9 +7,9 @@
 # Como rodar o projeto
 
   - Clone este repositório;
-  - Entre em app/backend e rode o seguinte comando: npm install;
-  - Entre em app/frontend e rode o seguinte comando: npm install;
-  - Entre em app e rode o comando: npm run compose::up:dev (esse comando irá subir os 3 containers da aplicação, sendo eles: o db, frontend e backend);
+  - Entre em app/backend e rode o seguinte comando: `npm install`;
+  - Entre em app/frontend e rode o seguinte comando: `npm install`;
+  - Entre em app e rode o comando: npm run `compose:up:dev` (esse comando irá subir os 3 containers da aplicação, sendo eles: o db, frontend e backend);
   - Agora é só acessar o frontend no navegador e aproveitar a aplicação;
 
   Observações:
